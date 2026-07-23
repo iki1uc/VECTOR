@@ -1,11 +1,10 @@
-function GEO3D_COLOR(f){
-    const d = ["●","○","·","∙","•"];
-    const p = (i)=> d[(f+i)%d.length];
+function SOUND_BARS(f){
+    const bars = ["▁","▂","▃","▄","▅","▆","▇","█"];
+    const b = (i)=> bars[(f+i)%bars.length];
 
     return `
-GEO‑3D COLOR
-X: <span style="color:#f00">${p(1)}</span> <span style="color:#f00">${p(2)}</span>
-Y: <span style="color:#0f0">${p(3)}</span> <span style="color:#0f0">${p(4)}</span>
-Z: <span style="color:#00f">${p(5)}</span> <span style="color:#00f">${p(1)}</span>
+SOUND‑BARS
+${b(1)} ${b(3)} ${b(5)} ${b(7)} ${b(2)} ${b(4)} ${b(6)}
+${b(2)} ${b(4)} ${b(6)} ${b(1)} ${b(3)} ${b(5)} ${b(7)}
 `;
 }
