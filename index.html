@@ -24,10 +24,10 @@ pre { white-space:pre; font-size:16px; line-height:18px; }
 <script src="core/VECTOR.pipeline12.js"></script>
 
 <!-- ASCII ENGINES -->
-<script src="1.js"></script> <!-- GTA6_ASCII -->
-<script src="3.js"></script> <!-- AMIGA_SCENE -->
-<script src="4.js"></script> <!-- SOUND_BARS -->
-<script src="9.js"></script> <!-- GEO3D_COLOR -->
+<script src="1.js"></script>
+<script src="3.js"></script>
+<script src="4.js"></script>
+<script src="9.js"></script>
 
 <!-- ID SYSTEM -->
 <script src="IDkoop.js"></script>
@@ -46,10 +46,7 @@ pre { white-space:pre; font-size:16px; line-height:18px; }
 <div id="vectorPIPE12" class="box"></div>
 
 <!-- ASCII OUTPUT -->
-<div id="asciiGEO" class="box"></div>
-<div id="asciiGTA" class="box"></div>
-<div id="asciiAMIGA" class="box"></div>
-<div id="asciiSOUND" class="box"></div>
+<div id="vectorASCII" class="box"></div>
 
 <!-- ID OUTPUT -->
 <div id="id-info" class="box"></div>
@@ -75,9 +72,13 @@ if(window.PIPELINE12_MASTER){
     VECTOR_PIPE12.receivePipeline12(pipe12);
 }
 
-// ASCII MASTER ENGINE
-let f = 0;
-setInterval(()=>{
-    f++;
+// ID SYSTEM
+function showID(mode) {
+    const map = { koop: ID_KOOP, neutral: ID_NEUTRAL, pook: ID_POOK };
+    const id = map[mode];
+    document.getElementById("id-info").innerText = id.info();
+}
+</script>
 
-    document.getElementById("ascii
+</body>
+</html>
