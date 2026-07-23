@@ -1,12 +1,14 @@
-function AMIGA_SCROLL(f){
-    const text = " AMIGA DEMO SCROLLER · VECTOR ULTRA · GEO4D · ";
-    const pos = f % text.length;
-    const scroll = text.slice(pos) + text.slice(0, pos);
+function AMIGA_MEGA(f){
+    const bars = ["██████████","▓▓▓▓▓▓▓▓▓","▒▒▒▒▒▒▒▒▒","░░░░░░░░░"];
+    const scroll = " AMIGA · VECTOR · ULTRA · GEO‑UNIVERSE ".repeat(2);
+    const pos = f % scroll.length;
 
     return `
-AMIGA‑SCROLLER
-${scroll}
-██████████████████████
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+AMIGA‑MEGA‑DEMO
+${scroll.slice(pos)}${scroll.slice(0,pos)}
+
+${bars[f%4]}
+${bars[(f+1)%4]}
+${bars[(f+2)%4]}
 `;
 }
