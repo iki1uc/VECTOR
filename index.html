@@ -5,48 +5,8 @@
 <title>VECTOR · MASTER · GEO‑UNIVERSE</title>
 
 <style>
-    body {
-        background: #000;
-        color: #fff;
-        font-family: monospace;
-        margin: 0;
-        padding: 0;
-    }
-
-    h1 {
-        text-align: center;
-        margin-top: 40px;
-        font-size: 34px;
-        color: #0ff;
-    }
-
-    h2 {
-        color: #0ff;
-        margin-bottom: 10px;
-    }
-
-    .section {
-        width: 90%;
-        margin: 40px auto;
-        padding: 20px;
-        border: 1px solid #333;
-        border-radius: 10px;
-        background: #111;
-    }
-
-    .block {
-        font-size: 18px;
-        line-height: 1.6;
-        white-space: pre-wrap;
-        color: #fff;
-    }
-
-    .ascii {
-        font-size: 16px;
-        white-space: pre;
-        margin-top: 20px;
-        color: #0f0;
-    }
+    body { background:#000; color:#fff; font-family:monospace; }
+    .ascii { white-space:pre; color:#0f0; font-size:16px; }
 </style>
 </head>
 
@@ -54,75 +14,19 @@
 
 <h1>VECTOR · MASTER · GEO‑UNIVERSE</h1>
 
-<!-- ANKER -->
-<div class="section">
-    <h2>ANKER – Stabilisationsachse</h2>
-    <div class="block">
-NAME: ANKER  
-ID: A01  
-Station: S01  
-Dimension: D4  
-Modus: erabel (neutral)
+<div id="ascii-output" class="ascii"></div>
 
-Bindungen:
-AXI · 6D · 360 · 100 · 213 REAL · API
-
-STATE = STABIL  
-READY = 100%
-    </div>
-</div>
-
-<!-- GEO ASCII OUTPUT -->
-<div class="section">
-    <h2>GEO‑Universe – ASCII‑Output</h2>
-    <div id="ascii-output" class="ascii">
-        Lade GEO‑Universe…
-    </div>
-</div>
-
-<!-- ID ACHSE -->
-<div class="section">
-    <h2>ID‑Achse</h2>
-    <div class="block">
-        <button onclick="showID('koop')">KOOP</button>
-        <button onclick="showID('neutral')">NEUTRAL</button>
-        <button onclick="showID('pook')">POOK</button>
-    </div>
-
-    <div id="id-info" class="block" style="margin-top:20px;">
-        ID‑Info erscheint hier…
-    </div>
-</div>
-
-<!-- RICHTIGE DATEINAMEN -->
 <script src="GEO4D.js"></script>
 <script src="GEO5D.js"></script>
 <script src="GEOUniverse.js"></script>
 <script src="GEOID.js"></script>
 
-<script src="IDkoop.js"></script>
-<script src="IDneutral.js"></script>
-<script src="IDpook.js"></script>
-
-<script src="VECTOR.render.js"></script>
-
 <script>
-function showID(mode) {
-    const map = {
-        koop: ID_KOOP,
-        neutral: ID_NEUTRAL,
-        pook: ID_POOK
-    };
-    const id = map[mode];
-    document.getElementById("id-info").innerText = id.info();
-}
-
-// ASCII RENDER LOOP
 let f = 0;
-setInterval(() => {
+setInterval(()=>{
     f++;
 
-    const out = `
+    document.getElementById("ascii-output").innerText = `
 ${GEO4D(f)}
 
 ${GEO5D(f)}
@@ -131,9 +35,6 @@ ${GEOUniverse(f)}
 
 ${GEOID("neutral", f)}
 `;
-
-    document.getElementById("ascii-output").innerText = out;
-
 }, 120);
 </script>
 
