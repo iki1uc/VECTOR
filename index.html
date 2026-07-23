@@ -24,10 +24,10 @@ pre { white-space:pre; font-size:16px; line-height:18px; }
 <script src="core/VECTOR.pipeline12.js"></script>
 
 <!-- ASCII ENGINES -->
-<script src="1.js"></script>
-<script src="3.js"></script>
-<script src="4.js"></script>
-<script src="9.js"></script>
+<script src="1.js"></script> <!-- GTA6 -->
+<script src="3.js"></script> <!-- Amiga -->
+<script src="4.js"></script> <!-- SoundBars -->
+<script src="9.js"></script> <!-- GEO -->
 
 <!-- ID SYSTEM -->
 <script src="IDkoop.js"></script>
@@ -40,15 +40,15 @@ pre { white-space:pre; font-size:16px; line-height:18px; }
 
 <h1>VECTOR · MASTER · ULTRA · ASCII‑FUSION</h1>
 
-<!-- VECTOR OUTPUT -->
 <div id="vectorULTRA" class="box"></div>
 <div id="vectorORBIT" class="box"></div>
 <div id="vectorPIPE12" class="box"></div>
 
-<!-- ASCII OUTPUT -->
-<div id="vectorASCII" class="box"></div>
+<div id="asciiGEO" class="box"></div>
+<div id="asciiGTA" class="box"></div>
+<div id="asciiAMIGA" class="box"></div>
+<div id="asciiSOUND" class="box"></div>
 
-<!-- ID OUTPUT -->
 <div id="id-info" class="box"></div>
 
 <script>
@@ -71,6 +71,18 @@ if(window.PIPELINE12_MASTER){
     const pipe12 = PIPELINE12_MASTER.start(ULTRA_KERNEL.ultra);
     VECTOR_PIPE12.receivePipeline12(pipe12);
 }
+
+// ASCII MASTER ENGINE
+let f = 0;
+setInterval(()=>{
+    f++;
+
+    document.getElementById("asciiGEO").innerHTML = GEO4D(f);
+    document.getElementById("asciiGTA").textContent = GTA6_CHASE(f);
+    document.getElementById("asciiAMIGA").textContent = AMIGA_SCROLL(f);
+    document.getElementById("asciiSOUND").textContent = SOUND_BASS(f);
+
+}, 120);
 
 // ID SYSTEM
 function showID(mode) {
