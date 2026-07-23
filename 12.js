@@ -1,18 +1,37 @@
-<div class="box"><pre id="geo"></pre></div>
-<div class="box"><pre id="amiga"></pre></div>
-<div class="box"><pre id="gta"></pre></div>
-<div class="box"><pre id="sound"></pre></div>
+window.VECTOR_BRIDGE = {
+    send(data){
+        if(window.iki1uc){
+            iki1uc.receive(data);
+        } else {
+            console.warn("iki1uc not loaded, VECTOR fallback active.");
+        }
+    }
+};
 
-<script>
-let f = 0;
+window.VECTOR_ASCII = {
+    frame: 0,
 
-setInterval(()=>{
-    f++;
+    tick(){
+        this.frame++;
+        const f = this.frame;
 
-    document.getElementById("geo").innerHTML = GEO3D_COLOR(f);
-    document.getElementById("amiga").textContent = AMIGA_SCENE(f);
-    document.getElementById("gta").textContent = GTA6_ASCII(f);
-    document.getElementById("sound").textContent = SOUND_BARS(f);
+        const out = {
+            geo4d: GEO4D(f),
+            gta: GTA6_CHASE(f),
+            amiga: AMIGA_SCROLL(f),
+            sound: SOUND_BASS(f)
+        };
 
-}, 120);
-</script>
+        window.VECTOR_BRIDGE.send(out);
+
+        if(document.getElementById("vectorASCII")){
+            document.getElementById("vectorASCII").innerHTML =
+                out.geo4d + "\n\n" +
+                out.gta + "\n\n" +
+                out.amiga + "\n\n" +
+                out.sound;
+        }
+    }
+};
+
+setInterval(()=> window.VECTOR_ASCII.tick(), 120);
