@@ -8,35 +8,30 @@ window.VECTOR_BRIDGE = {
     }
 };
 
-// Neue ASCII‑Engines integrieren
 window.VECTOR_ASCII = {
     frame: 0,
 
     tick(){
         this.frame++;
-
         const f = this.frame;
 
         const out = {
-            geo: GEO3D_COLOR(f),
-            amiga: AMIGA_SCENE(f),
+            geo4d: GEO3D_COLOR(f),
             gta: GTA6_ASCII(f),
+            amiga: AMIGA_SCENE(f),
             sound: SOUND_BARS(f)
         };
 
-        // Weiterleiten an iki1uc
         window.VECTOR_BRIDGE.send(out);
 
-        // Optional: direkt in DOM anzeigen
         if(document.getElementById("vectorASCII")){
             document.getElementById("vectorASCII").innerHTML =
-                out.geo + "\n\n" +
-                out.amiga + "\n\n" +
+                out.geo4d + "\n\n" +
                 out.gta + "\n\n" +
+                out.amiga + "\n\n" +
                 out.sound;
         }
     }
 };
 
-// ASCII‑Engine starten
 setInterval(()=> window.VECTOR_ASCII.tick(), 120);
