@@ -1,15 +1,13 @@
 function AMIGA_SCENE(f){
-    const bars = [
-        "██████████████████████",
-        "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓",
-        "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒",
-        "░░░░░░░░░░░░░░░░░░░░░░"
-    ];
+    const text = " AMIGA DEMO SCROLLER ";
+    const pos = f % text.length;
+
+    const scroll = text.slice(pos) + text.slice(0, pos);
+
     return `
-AMIGA‑SCENE
-${bars[f%4]}
-${bars[(f+1)%4]}
-${bars[(f+2)%4]}
-${bars[(f+3)%4]}
+AMIGA‑SCROLLER
+${scroll}
+██████████████████████
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 `;
 }
