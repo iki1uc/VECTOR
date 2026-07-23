@@ -16,11 +16,20 @@
 
 <div id="ascii-output" class="ascii"></div>
 
-<!-- RICHTIGE DATEINAMEN -->
+<!-- ASCII ENGINES -->
 <script src="GEO4D.js"></script>
 <script src="GEO5D.js"></script>
 <script src="GEOUniverse.js"></script>
 <script src="GEOID.js"></script>
+
+<script src="1.js"></script>
+<script src="3.js"></script>
+<script src="4.js"></script>
+<script src="9.js"></script>
+<script src="12.js"></script>
+
+<!-- RENDER ENGINE -->
+<script src="VECTOR.render.js"></script>
 
 <script>
 let f = 0;
@@ -29,12 +38,14 @@ setInterval(()=>{
 
     document.getElementById("ascii-output").innerText = `
 ${GEO4D(f)}
-
 ${GEO5D(f)}
-
 ${GEOUniverse(f)}
-
 ${GEOID("neutral", f)}
+${ENGINE1(f)}
+${ENGINE3(f)}
+${ENGINE4(f)}
+${ENGINE9(f)}
+${ENGINE12(f)}
 `;
 }, 120);
 </script>
