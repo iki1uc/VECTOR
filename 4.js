@@ -1,13 +1,15 @@
-function GTA6_ASCII(f){
-    const car = f%2 ? "🚗" : "🚓";
-    const cop = f%3 ? "🚓" : "🚨";
-    const boom = f%4 ? "🔥" : "💥";
+function GTA6_STORY(f){
+    const hero = f%2 ? "🧍" : "🏃";
+    const car = "🚗";
     const city = "🏙".repeat(8);
 
     return `
-GTA‑6 POLICE CHASE
-${car}──${city}──${cop}
-${cop}──${boom}──${car}
-${boom}──${cop}──${city}
+GTA‑6 STORY MODE
+Hero: ${hero}
+Car : ${car}
+City: ${city}
+
+Mission:
+${f%2 ? "Escape the cops!" : "Find the safehouse!"}
 `;
 }
