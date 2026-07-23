@@ -1,13 +1,96 @@
-function GTA6_ASCII(f){
-    const car = f%2 ? "🚗" : "🚓";
-    const boom = f%3 ? "🔥" : "💥";
-    const npc = f%4 ? "🧍" : "🏃";
-    const city = "🏙".repeat(8);
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>VECTOR · MASTER · ULTRA · GEO‑4D · ASCII‑SHOW</title>
 
-    return `
-GTA‑6 LIVE
-${car}──${city}──${boom}
-${npc}──${car}──${city}
-${boom}──${npc}──${car}
-`;
+<style>
+body { background:#000; color:#0f0; font-family:monospace; padding:40px; }
+h1 { color:#6cf; text-align:center; }
+.box { background:#111; padding:20px; margin:20px 0; border-left:3px solid #6cf; }
+pre { white-space:pre; font-size:16px; line-height:18px; }
+</style>
+
+<!-- VECTOR SYSTEM -->
+<script src="core/GAM.core.js"></script>
+<script src="core/VECTOR.core.js"></script>
+<script src="core/VECTOR.respo.js"></script>
+<script src="core/VECTOR.render.js"></script>
+<script src="core/VECTOR.81.js"></script>
+<script src="core/VECTOR.kapital.js"></script>
+<script src="core/RUN8.js"></script>
+<script src="core/VECTOR.ultra.js"></script>
+<script src="core/VECTOR.orbit.js"></script>
+<script src="core/VECTOR.pipeline12.js"></script>
+
+<!-- ASCII ENGINES -->
+<script src="1.js"></script> <!-- GTA6_ASCII -->
+<script src="3.js"></script> <!-- AMIGA_SCENE -->
+<script src="4.js"></script> <!-- SOUND_BARS -->
+<script src="9.js"></script> <!-- GEO3D_COLOR -->
+
+<!-- ID SYSTEM -->
+<script src="IDkoop.js"></script>
+<script src="IDneutral.js"></script>
+<script src="IDpook.js"></script>
+
+</head>
+
+<body>
+
+<h1>VECTOR · MASTER · ULTRA · ASCII‑FUSION</h1>
+
+<div id="vectorULTRA" class="box"></div>
+<div id="vectorORBIT" class="box"></div>
+<div id="vectorPIPE12" class="box"></div>
+
+<div id="asciiGEO" class="box"></div>
+<div id="asciiGTA" class="box"></div>
+<div id="asciiAMIGA" class="box"></div>
+<div id="asciiSOUND" class="box"></div>
+
+<div id="id-info" class="box"></div>
+
+<script>
+RUN8.start();
+
+// ULTRA
+if(window.ULTRA_KERNEL){
+    const matrix = ULTRA_KERNEL.start();
+    VECTOR_ULTRA.receive9hoch9(matrix);
 }
+
+// ORBIT
+if(window.CXR_ORBIT){
+    const orbit = CXR_ORBIT.start(ULTRA_KERNEL.ultra);
+    VECTOR_ORBIT.receiveOrbit(orbit);
+}
+
+// PIPELINE12
+if(window.PIPELINE12_MASTER){
+    const pipe12 = PIPELINE12_MASTER.start(ULTRA_KERNEL.ultra);
+    VECTOR_PIPE12.receivePipeline12(pipe12);
+}
+
+// ASCII MASTER ENGINE
+let f = 0;
+setInterval(()=>{
+    f++;
+
+    document.getElementById("asciiGEO").innerHTML = GEO3D_COLOR(f);
+    document.getElementById("asciiGTA").textContent = GTA6_ASCII(f);
+    document.getElementById("asciiAMIGA").textContent = AMIGA_SCENE(f);
+    document.getElementById("asciiSOUND").textContent = SOUND_BARS(f);
+
+}, 120);
+
+// ID SYSTEM
+function showID(mode) {
+    const map = { koop: ID_KOOP, neutral: ID_NEUTRAL, pook: ID_POOK };
+    const id = map[mode];
+    document.getElementById("id-info").innerText = id.info();
+}
+</script>
+
+</body>
+</html>
