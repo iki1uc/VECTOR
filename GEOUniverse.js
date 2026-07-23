@@ -1,15 +1,21 @@
-function GEO_UNIVERSE(f){
-    const star = f%2 ? "✦" : "✧";
-    const line = "· ".repeat((f%20)+5);
+function GEOUniverse(f){
+    const spin = ["●","○","∙","•","◦"];
+    const p = spin[f % spin.length];
 
     return `
 GEO‑UNIVERSE
-${star} ${star} ${star} ${star}
+${p} ${p} ${p} ${p}
 
-COSMIC‑FLOW:
-${line}
+ME = ROOT
+QI = ${p}
+IQQ = ${p}${p}
+6D = aktiv
+TRANSCORE = stabil
 
-DIMENSIONS:
-4D → 5D → ∞D
+DIMENSION:
+4D → 5D → 6D → ∞D
+
+STATE:
+SYNC OK
 `;
 }
