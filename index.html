@@ -54,7 +54,7 @@
 
 <h1>VECTOR · MASTER · GEO‑UNIVERSE</h1>
 
-<!-- ANKER / ID / 6D -->
+<!-- ANKER -->
 <div class="section">
     <h2>ANKER – Stabilisationsachse</h2>
     <div class="block">
@@ -72,7 +72,7 @@ READY = 100%
     </div>
 </div>
 
-<!-- GEO 4D / 5D / UNIVERSE -->
+<!-- GEO ASCII OUTPUT -->
 <div class="section">
     <h2>GEO‑Universe – ASCII‑Output</h2>
     <div id="ascii-output" class="ascii">
@@ -94,13 +94,17 @@ READY = 100%
     </div>
 </div>
 
-<script src="GEO‑4D.js"></script>
-<script src="GEO‑5D.js"></script>
-<script src="GEO‑Universe.js"></script>
+<!-- RICHTIGE DATEINAMEN -->
+<script src="GEO4D.js"></script>
+<script src="GEO5D.js"></script>
+<script src="GEOUniverse.js"></script>
+<script src="GEOID.js"></script>
 
 <script src="IDkoop.js"></script>
 <script src="IDneutral.js"></script>
 <script src="IDpook.js"></script>
+
+<script src="VECTOR.render.js"></script>
 
 <script>
 function showID(mode) {
@@ -113,6 +117,7 @@ function showID(mode) {
     document.getElementById("id-info").innerText = id.info();
 }
 
+// ASCII RENDER LOOP
 let f = 0;
 setInterval(() => {
     f++;
@@ -122,7 +127,9 @@ ${GEO4D(f)}
 
 ${GEO5D(f)}
 
-${GEO_UNIVERSE(f)}
+${GEOUniverse(f)}
+
+${GEOID("neutral", f)}
 `;
 
     document.getElementById("ascii-output").innerText = out;
