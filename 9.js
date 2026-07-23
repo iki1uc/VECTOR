@@ -1,4 +1,4 @@
-function SOUND_BARS(f){
+function SOUND_BASS(f){
     const bars = ["▁","▂","▃","▄","▅","▆","▇","█"];
     const b = (i)=> bars[(f+i)%bars.length];
 
