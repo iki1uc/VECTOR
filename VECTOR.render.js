@@ -1,13 +1,3 @@
-window.VECTOR_BRIDGE = {
-    send(data){
-        if(window.iki1uc){
-            iki1uc.receive(data);
-        } else {
-            console.warn("iki1uc not loaded, VECTOR fallback active.");
-        }
-    }
-};
-
 window.VECTOR_ASCII = {
     frame: 0,
 
@@ -16,18 +6,23 @@ window.VECTOR_ASCII = {
         const f = this.frame;
 
         const out = {
-            geo4d: GEO3D_COLOR(f),
-            gta: GTA6_ASCII(f),
-            amiga: AMIGA_SCENE(f),
-            sound: SOUND_BARS(f)
+            geo4d: GEO4D(f),
+            geo5d: GEO5D(f),
+            universe: GEO_UNIVERSE(f),
+            gta_chase: GTA6_CHASE(f),
+            gta_story: GTA6_STORY(f),
+            amiga: AMIGA_MEGA(f),
+            sound: SOUND_FFT(f)
         };
 
-        window.VECTOR_BRIDGE.send(out);
-
-        if(document.getElementById("vectorASCII")){
-            document.getElementById("vectorASCII").innerHTML =
+        const box = document.getElementById("vectorASCII");
+        if(box){
+            box.innerHTML =
                 out.geo4d + "\n\n" +
-                out.gta + "\n\n" +
+                out.geo5d + "\n\n" +
+                out.universe + "\n\n" +
+                out.gta_chase + "\n\n" +
+                out.gta_story + "\n\n" +
                 out.amiga + "\n\n" +
                 out.sound;
         }
