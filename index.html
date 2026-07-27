@@ -5,51 +5,56 @@
 <title>VECTOR – QI/IQQ · Orbit‑C · Stationen · PIPE‑12</title>
 
 <style>
-body { background:#000; color:#0f0; font-family:Consolas, monospace; padding:20px; }
-h2 { color:#6cf; }
-pre { background:#111; padding:12px; border:1px solid #333; }
+body { background:#000; color:#0f0; font-family:Consolas; padding:20px; }
+h2 { color:#6cf; margin-top:30px; }
 </style>
 </head>
 <body>
 
-<h2>VECTOR – QI/IQQ</h2>
-<pre id="qi_iqq"></pre>
+<h2>QI / IQQ</h2>
+<div id="qi_iqq"></div>
 
 <h2>Orbit‑C</h2>
-<pre id="orbit"></pre>
+<div id="orbit"></div>
 
 <h2>Stationen‑Matrix</h2>
-<pre id="stationen"></pre>
+<div id="stationen"></div>
 
 <h2>PIPE‑12</h2>
-<pre id="pipe12"></pre>
+<div id="pipe12"></div>
 
+<!-- VECTOR RAW + VECTOR EXP -->
+<script src="./core/vector_raw"></script>
+<script src="./core/vector.EXP"></script>
+<script>
+window.vectorEXP = new VECTOR_EXP(vector_raw);
+const vector = window.vectorEXP;
+</script>
+
+<!-- VISUALIZER MODULES -->
 <script type="module">
-
 import { VIS_QI_IQQ } from "./VIS.qi_iqq.js";
 import { VIS_ORBIT_C } from "./VIS.orbitC.js";
 import { VIS_STATIONEN } from "./VIS.stationen.js";
 import { VIS_PIPE12 } from "./VIS.pipe12.js";
 
-const vector = window.vectorEXP;
 const value = 42;
 
 // QI/IQQ
-document.getElementById("qi_iqq").innerText =
-    JSON.stringify(VIS_QI_IQQ(value, vector), null, 2);
+document.getElementById("qi_iqq").innerHTML =
+    VIS_QI_IQQ(value, vector);
 
 // Orbit‑C
-document.getElementById("orbit").innerText =
-    JSON.stringify(VIS_ORBIT_C(value, vector), null, 2);
+document.getElementById("orbit").innerHTML =
+    VIS_ORBIT_C(value, vector);
 
-// Stationen
-document.getElementById("stationen").innerText =
-    JSON.stringify(VIS_STATIONEN(value, vector), null, 2);
+// Stationen‑Matrix
+document.getElementById("stationen").innerHTML =
+    VIS_STATIONEN(value, vector);
 
 // PIPE‑12
-document.getElementById("pipe12").innerText =
-    JSON.stringify(VIS_PIPE12(value, vector), null, 2);
-
+document.getElementById("pipe12").innerHTML =
+    VIS_PIPE12(value, vector);
 </script>
 
 </body>
