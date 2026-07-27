@@ -2,105 +2,54 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>SAT · VECTOR RESPO MANN · ALLXALL</title>
+<title>VECTOR – QI/IQQ · Orbit‑C · Stationen · PIPE‑12</title>
 
 <style>
-    body { background:#000; color:#fff; font-family:monospace; margin:0; overflow:hidden; }
-    #ascii { white-space:pre; color:#0f0; font-size:16px; padding:20px; }
-    canvas { position:absolute; top:0; left:0; z-index:-1; }
+body { background:#000; color:#0f0; font-family:Consolas, monospace; padding:20px; }
+h2 { color:#6cf; }
+pre { background:#111; padding:12px; border:1px solid #333; }
 </style>
 </head>
-
 <body>
 
-<h1>SAT · VECTOR RESPO MANN · ALLXALL</h1>
+<h2>VECTOR – QI/IQQ</h2>
+<pre id="qi_iqq"></pre>
 
-<canvas id="universe"></canvas>
-<div id="ascii"></div>
+<h2>Orbit‑C</h2>
+<pre id="orbit"></pre>
 
-<!-- GEO Engines -->
-<script src="GEO4D.js"></script>
-<script src="GEO5D.js"></script>
-<script src="GEOUniverse.js"></script>
-<script src="GEOID.js"></script>
+<h2>Stationen‑Matrix</h2>
+<pre id="stationen"></pre>
 
-<!-- VECTOR Engines -->
-<script src="VECTOR.81.js"></script>
-<script src="VECTOR.kapital.js"></script>
-<script src="VECTOR.orbit.js"></script>
-<script src="VECTOR.pipeline12.js"></script>
-<script src="VECTOR.render.js"></script>
-<script src="VECTOR.respo.js"></script>
-<script src="VECTOR.ultra.js"></script>
+<h2>PIPE‑12</h2>
+<pre id="pipe12"></pre>
 
-<!-- ASCII Engines -->
-<script src="1.js"></script>
-<script src="3.js"></script>
-<script src="4.js"></script>
-<script src="9.js"></script>
-<script src="12.js"></script>
+<script type="module">
 
-<script>
-const canvas = document.getElementById("universe");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+import { VIS_QI_IQQ } from "./VIS.qi_iqq.js";
+import { VIS_ORBIT_C } from "./VIS.orbitC.js";
+import { VIS_STATIONEN } from "./VIS.stationen.js";
+import { VIS_PIPE12 } from "./VIS.pipe12.js";
 
-let f = 0;
+const vector = window.vectorEXP;
+const value = 42;
 
-function drawPoint(x, y, color, size=8) {
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    ctx.arc(x, y, size, 0, Math.PI*2);
-    ctx.fill();
-}
+// QI/IQQ
+document.getElementById("qi_iqq").innerText =
+    JSON.stringify(VIS_QI_IQQ(value, vector), null, 2);
 
-setInterval(()=>{
-    f++;
+// Orbit‑C
+document.getElementById("orbit").innerText =
+    JSON.stringify(VIS_ORBIT_C(value, vector), null, 2);
 
-    // ASCII OUTPUT
-    document.getElementById("ascii").innerText = `
-${GEO4D(f)}
-${GEO5D(f)}
-${GEOUniverse(f)}
-${GEOID("neutral", f)}
+// Stationen
+document.getElementById("stationen").innerText =
+    JSON.stringify(VIS_STATIONEN(value, vector), null, 2);
 
-${ENGINE1(f)}
-${ENGINE3(f)}
-${ENGINE4(f)}
-${ENGINE9(f)}
-${ENGINE12(f)}
+// PIPE‑12
+document.getElementById("pipe12").innerText =
+    JSON.stringify(VIS_PIPE12(value, vector), null, 2);
 
-VECTOR81: ${JSON.stringify(VECTOR81(f), null, 2)}
-KAPITAL: ${JSON.stringify(VECTOR_KAPITAL(f), null, 2)}
-ORBIT: ${JSON.stringify(VECTOR_ORBIT(f), null, 2)}
-PIPE12: ${JSON.stringify(VECTOR_PIPE(f), null, 2)}
-RENDER: ${JSON.stringify(VECTOR_RENDER("SAT"), null, 2)}
-RESPO: ${JSON.stringify(VECTOR_RESPO("AXIS"), null, 2)}
-ULTRA: ${JSON.stringify(VECTOR_ULTRA("DEEPSPACEMIND"), null, 2)}
-`;
-
-    // VISUAL UNIVERSE
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    // GEO Universe Zentrum
-    drawPoint(canvas.width/2, canvas.height/2, "#f0f", 12);
-
-    // VECTOR ORBIT
-    const orb = VECTOR_ORBIT(f);
-    drawPoint(canvas.width/2 + orb.x, canvas.height/2 + orb.y, "#6cf");
-
-    // GEO 4D / 5D Punkte
-    const g4 = GEO4D(f);
-    const g5 = GEO5D(f);
-    drawPoint(canvas.width/2 + g4.x, canvas.height/2 + g4.y, "#0f0");
-    drawPoint(canvas.width/2 + g5.x, canvas.height/2 + g5.y, "#ccc");
-
-    // ULTRA VECTOR
-    const ultra = VECTOR_ULTRA("DEEPSPACEMIND");
-    drawPoint(canvas.width/2 + ultra.x, canvas.height/2 + ultra.y, "#ff0", 14);
-
-}, 120);
 </script>
 
 </body>
