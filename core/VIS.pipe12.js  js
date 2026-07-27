@@ -1,0 +1,15 @@
+export function VIS_PIPE12(value, vector) {
+
+    return {
+        pipe3: vector.pipe3(value),
+        pipe6: vector.pipe6(value),
+        pipe9: vector.pipe9(value),
+        pipe12: vector.pipe12(value),
+        full: [
+            vector.pipe3(value),
+            vector.pipe6(value),
+            vector.pipe9(value),
+            vector.pipe12(value)
+        ]
+    };
+}
