@@ -2,51 +2,104 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>VECTOR · MASTER · GEO‑UNIVERSE</title>
+<title>SAT · VECTOR RESPO MANN · ALLXALL</title>
 
 <style>
-    body { background:#000; color:#fff; font-family:monospace; }
-    .ascii { white-space:pre; color:#0f0; font-size:16px; }
+    body { background:#000; color:#fff; font-family:monospace; margin:0; overflow:hidden; }
+    #ascii { white-space:pre; color:#0f0; font-size:16px; padding:20px; }
+    canvas { position:absolute; top:0; left:0; z-index:-1; }
 </style>
 </head>
 
 <body>
 
-<h1>VECTOR · MASTER · GEO‑UNIVERSE</h1>
+<h1>SAT · VECTOR RESPO MANN · ALLXALL</h1>
 
-<div id="ascii-output" class="ascii"></div>
+<canvas id="universe"></canvas>
+<div id="ascii"></div>
 
-<!-- ASCII ENGINES -->
+<!-- GEO Engines -->
 <script src="GEO4D.js"></script>
 <script src="GEO5D.js"></script>
 <script src="GEOUniverse.js"></script>
 <script src="GEOID.js"></script>
 
+<!-- VECTOR Engines -->
+<script src="VECTOR.81.js"></script>
+<script src="VECTOR.kapital.js"></script>
+<script src="VECTOR.orbit.js"></script>
+<script src="VECTOR.pipeline12.js"></script>
+<script src="VECTOR.render.js"></script>
+<script src="VECTOR.respo.js"></script>
+<script src="VECTOR.ultra.js"></script>
+
+<!-- ASCII Engines -->
 <script src="1.js"></script>
 <script src="3.js"></script>
 <script src="4.js"></script>
 <script src="9.js"></script>
 <script src="12.js"></script>
 
-<!-- RENDER ENGINE -->
-<script src="VECTOR.render.js"></script>
-
 <script>
+const canvas = document.getElementById("universe");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
 let f = 0;
+
+function drawPoint(x, y, color, size=8) {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0, Math.PI*2);
+    ctx.fill();
+}
+
 setInterval(()=>{
     f++;
 
-    document.getElementById("ascii-output").innerText = `
+    // ASCII OUTPUT
+    document.getElementById("ascii").innerText = `
 ${GEO4D(f)}
 ${GEO5D(f)}
 ${GEOUniverse(f)}
 ${GEOID("neutral", f)}
+
 ${ENGINE1(f)}
 ${ENGINE3(f)}
 ${ENGINE4(f)}
 ${ENGINE9(f)}
 ${ENGINE12(f)}
+
+VECTOR81: ${JSON.stringify(VECTOR81(f), null, 2)}
+KAPITAL: ${JSON.stringify(VECTOR_KAPITAL(f), null, 2)}
+ORBIT: ${JSON.stringify(VECTOR_ORBIT(f), null, 2)}
+PIPE12: ${JSON.stringify(VECTOR_PIPE(f), null, 2)}
+RENDER: ${JSON.stringify(VECTOR_RENDER("SAT"), null, 2)}
+RESPO: ${JSON.stringify(VECTOR_RESPO("AXIS"), null, 2)}
+ULTRA: ${JSON.stringify(VECTOR_ULTRA("DEEPSPACEMIND"), null, 2)}
 `;
+
+    // VISUAL UNIVERSE
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    // GEO Universe Zentrum
+    drawPoint(canvas.width/2, canvas.height/2, "#f0f", 12);
+
+    // VECTOR ORBIT
+    const orb = VECTOR_ORBIT(f);
+    drawPoint(canvas.width/2 + orb.x, canvas.height/2 + orb.y, "#6cf");
+
+    // GEO 4D / 5D Punkte
+    const g4 = GEO4D(f);
+    const g5 = GEO5D(f);
+    drawPoint(canvas.width/2 + g4.x, canvas.height/2 + g4.y, "#0f0");
+    drawPoint(canvas.width/2 + g5.x, canvas.height/2 + g5.y, "#ccc");
+
+    // ULTRA VECTOR
+    const ultra = VECTOR_ULTRA("DEEPSPACEMIND");
+    drawPoint(canvas.width/2 + ultra.x, canvas.height/2 + ultra.y, "#ff0", 14);
+
 }, 120);
 </script>
 
