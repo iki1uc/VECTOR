@@ -1,1 +1,5 @@
+<script src="./core/vector_raw"></script>
+<script src="./core/vector.EXP"></script>
+<script>
 window.vectorEXP = new VECTOR_EXP(vector_raw);
+</script>
