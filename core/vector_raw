@@ -1,0 +1,1 @@
+window.vectorEXP = new VECTOR_EXP(vector_raw);
