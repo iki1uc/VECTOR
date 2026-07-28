@@ -1,0 +1,7 @@
+﻿Modul,Aufgabe
+PIPELINE_LOAD,"entscheidet, ob gültig"
+KI_WAKE_UP,erzeugt Whirl aus Input
+TMP_Whirl,setzt Achsen B/H/T
+PQ_PC_Parallel,verarbeitet Tasks
+RESPO_Whirl,erzeugt KI‑Flow
+NC_link_Whirl,verbindet alles
