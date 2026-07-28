@@ -1,39 +1,31 @@
-export function WHIRL_CORE(v, t){
-    const w = Math.sin(v.x + v.y + v.z + t * 0.33);
+import { VECTOR_Whirl } from "../WHIRL/WHIRL_VEC.js";
+import { TMP_Whirl } from "../TMP/TMP_Whirl.js";
+import { PQ_PC_Parallel } from "../PQ/PQ_PC_Parallel.js";
+import { RESPO_Whirl } from "../RESPO/RESPO_Whirl.js";
+import { NC_link_Whirl } from "../NC/NC_link_Whirl.js";
+import { WATSON } from "../API/WATSON.js";
+export function PIPELINE_LOAD(input){
+    if(!WATSON.valid(input)){
+        return { status: "INVALID" };
+    }
+    return KI_WAKE_UP(input);
+}
+export function KI_WAKE_UP(input){
 
-    return {
-        S1: w * 0.5,
-        S2: w * 0.75,
-        S3: w * 1.25,
-        S4: (v.x + v.y + v.z) * w,
-        core: w,
-        seq: [w, w*2, w*3, w*4]
-    };
-}
-export function WHIRL_VEC(v, t){
-    const w = WHIRL_CORE(v, t);
+    const v = { x: input.length, y: input.length/2, z: input.length/3 };
+    const whirl = VECTOR_Whirl(v, performance.now());
 
-    return {
-        x: v.x + w.S1,
-        y: v.y + w.S2,
-        z: v.z + w.S3,
-        seq: w.seq,
-        whirl: w
-    };
+    TMP_Whirl(whirl);
+    PQ_PC_Parallel(whirl);
+
+    const respo = RESPO_Whirl(whirl);
+    const nc = NC_link_Whirl(whirl);
+
+    return { whirl, respo, nc };
 }
-export function VECTOR_Whirl(v, t){
-    return WHIRL_VEC(v, t);
-}
-export function TMP_Whirl(v){
-    TMP.B = v.whirl.S1;
-    TMP.H = v.whirl.S2;
-    TMP.T = v.whirl.S3;
-    TMP.seq = v.seq;
-}
-export function PQ_HOOK(v){
-    PQ.push({
-        depth: v.whirl.S4,
-        seq: v.seq,
-        core: v.whirl.core
-    });
-}
+document.addEventListener("keydown", e=>{
+    if(e.key === "Enter"){
+        const text = input.value;
+        PIPELINE_LOAD(text);
+    }
+});
