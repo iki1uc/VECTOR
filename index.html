@@ -1,56 +1,72 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>IKI1UC – Pipeline</title>
+<meta charset="UTF-8">
+<title>IKI1UC · ALL-IN-ALL-OUT Pipeline</title>
 
-    <style>
-        body {
-            background: #111;
-            color: #eee;
-            font-family: monospace;
-            padding: 20px;
-        }
-        #input {
-            width: 400px;
-            padding: 10px;
-            font-size: 18px;
-            background: #222;
-            color: #0f0;
-            border: 1px solid #444;
-        }
-        #log {
-            margin-top: 20px;
-            white-space: pre;
-            font-size: 14px;
-        }
-    </style>
+<style>
+body { background:#000; color:#0ff; font-family:Consolas; padding:20px; }
+h1 { color:#6cf; }
+h2 { color:#0f0; margin-top:30px; }
+pre { background:#111; padding:12px; border:1px solid #333; border-radius:6px; }
+#input { width:400px; padding:10px; background:#111; color:#0f0; border:1px solid #333; }
+</style>
+
+<script type="module">
+
+import { PIPELINE_LOAD } from "./boot.room";
+import { PQ_HISTORY } from "./PQ/PQ_PC_Parallel.js";
+import { NC_LOG } from "./NC/NC_link_Whirl.js";
+import { RESPO_LOG } from "./RESPO/RESPO_Whirl.js";
+import { TMP } from "./TMP/TMP_Whirl.js";
+
+document.addEventListener("keydown", e => {
+    if(e.key === "Enter"){
+        const text = document.getElementById("input").value;
+        const out = PIPELINE_LOAD(text);
+
+        document.getElementById("pipeline").textContent =
+            JSON.stringify(out, null, 2);
+
+        document.getElementById("pq").textContent =
+            JSON.stringify(PQ_HISTORY, null, 2);
+
+        document.getElementById("nc").textContent =
+            JSON.stringify(NC_LOG, null, 2);
+
+        document.getElementById("respo").textContent =
+            JSON.stringify(RESPO_LOG, null, 2);
+
+        document.getElementById("axes").textContent =
+            JSON.stringify(TMP, null, 2);
+    }
+});
+
+</script>
+
 </head>
 
 <body>
 
-<h2>IKI1UC – Pipeline</h2>
+<h1>IKI1UC · ALL-IN-ALL-OUT Pipeline</h1>
+
+<h2>Input</h2>
 <input id="input" placeholder="ENTER → Pipeline Load">
 
-<div id="log"></div>
+<h2>Pipeline Output</h2>
+<pre id="pipeline">Warte…</pre>
 
-<script type="module">
+<h2>PQ_HISTORY</h2>
+<pre id="pq">Warte…</pre>
 
-    import { PIPELINE_LOAD } from "./boot.room";
+<h2>NC_LOG</h2>
+<pre id="nc">Warte…</pre>
 
-    const input = document.getElementById("input");
-    const log = document.getElementById("log");
+<h2>RESPO_LOG</h2>
+<pre id="respo">Warte…</pre>
 
-    document.addEventListener("keydown", e => {
-        if (e.key === "Enter") {
-            const text = input.value;
-            const out = PIPELINE_LOAD(text);
-
-            log.innerText = JSON.stringify(out, null, 2);
-        }
-    });
-
-</script>
+<h2>TMP-Achsen</h2>
+<pre id="axes">Warte…</pre>
 
 </body>
 </html>
