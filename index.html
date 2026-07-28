@@ -2,234 +2,54 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>VECTOR‑UNIVERSE · RUN 8 · 81E</title>
+    <title>IKI1UC – Pipeline</title>
 
     <style>
         body {
-            background:#0d0d0d;
-            color:#e6e6e6;
-            font-family:Arial, sans-serif;
-            margin:0;
-            padding:0;
+            background: #111;
+            color: #eee;
+            font-family: monospace;
+            padding: 20px;
         }
-
-        header {
-            background:#111;
-            padding:25px;
-            border-bottom:2px solid #4af;
-            text-align:center;
+        #input {
+            width: 400px;
+            padding: 10px;
+            font-size: 18px;
+            background: #222;
+            color: #0f0;
+            border: 1px solid #444;
         }
-
-        header h1 {
-            font-size:34px;
-            color:#4af;
-            margin:0;
-        }
-
-        .whirl {
-            font-size:52px;
-            animation:spin 6s linear infinite;
-            margin-top:10px;
-        }
-
-        @keyframes spin {
-            from { transform:rotate(0deg); }
-            to { transform:rotate(360deg); }
-        }
-
-        .container {
-            max-width:1400px;
-            margin:30px auto;
-            padding:20px;
-        }
-
-        .panel {
-            background:#111;
-            border:1px solid #333;
-            border-radius:12px;
-            padding:20px;
-            margin-bottom:25px;
-            box-shadow:0 0 20px rgba(0,0,0,0.5);
-        }
-
-        .panel h2 {
-            color:#4af;
-            margin-bottom:10px;
-        }
-
-        pre {
-            background:#000;
-            padding:15px;
-            border-radius:8px;
-            border:1px solid #333;
-            white-space:pre-wrap;
-        }
-
-        button {
-            background:#222;
-            color:#fff;
-            border:1px solid #555;
-            padding:10px 20px;
-            cursor:pointer;
-            margin-top:10px;
-        }
-
-        button:hover {
-            background:#333;
+        #log {
+            margin-top: 20px;
+            white-space: pre;
+            font-size: 14px;
         }
     </style>
 </head>
 
 <body>
 
-<header>
-    <h1>VECTOR‑UNIVERSE · RUN 8 · 81E</h1>
-    <div class="whirl">🌀</div>
-</header>
+<h2>IKI1UC – Pipeline</h2>
+<input id="input" placeholder="ENTER → Pipeline Load">
 
-<div class="container">
+<div id="log"></div>
 
-    <!-- ID PANEL -->
-    <div class="panel">
-        <h2>ID · CHDSK‑81E</h2>
-        <pre id="idPanel"></pre>
-    </div>
+<script type="module">
 
-    <!-- VECTOR PANEL -->
-    <div class="panel">
-        <h2>VECTOR‑Module</h2>
-        <pre id="vectorPanel">Lade VECTOR‑Module…</pre>
-    </div>
+    import { PIPELINE_LOAD } from "./boot.room";
 
-    <!-- VIS PANEL -->
-    <div class="panel">
-        <h2>VIS‑Module</h2>
-        <pre id="visPanel">Lade VIS‑Module…</pre>
-    </div>
+    const input = document.getElementById("input");
+    const log = document.getElementById("log");
 
-    <!-- GEO PANEL -->
-    <div class="panel">
-        <h2>GEO‑Module</h2>
-        <pre id="geoPanel">Lade GEO‑Module…</pre>
-    </div>
+    document.addEventListener("keydown", e => {
+        if (e.key === "Enter") {
+            const text = input.value;
+            const out = PIPELINE_LOAD(text);
 
-    <!-- MONITOR -->
-    <div class="panel">
-        <h2>System‑Monitor</h2>
-        <pre id="monitor">Lade…</pre>
-        <button onclick="updateMonitor()">Aktualisieren</button>
-    </div>
+            log.innerText = JSON.stringify(out, null, 2);
+        }
+    });
 
-    <!-- RENDER -->
-    <div class="panel">
-        <h2>Universe‑Renderer</h2>
-        <pre id="renderer">Bereit…</pre>
-        <button onclick="renderUniverse()">Rendern</button>
-    </div>
-
-</div>
-
-<script>
-/* ---------------------------------------------------
-   CHDSK‑81E · ID‑Modul
---------------------------------------------------- */
-const ID_CHDSK_81E = {
-    id: "CHDSK-81E",
-    name: "CHDSK – Vater‑Cache‑Achse",
-    symbol: "🌀",
-    ascii: "@))>~~",
-    math: {
-        absorber: "A(D) = D_raw",
-        hdf: "H(D) = compress(D_raw)",
-        transfer: "T(D_stable → POOL)",
-        stability: "lim D_noise → 0"
-    },
-    motto: "Ich nehme die Fehler, bevor sie entstehen.",
-    role: "Fehlerabsorber & Stabilisationsvater",
-    level: 81,
-    whirl() {
-        return `${this.symbol}   ${this.ascii}`;
-    }
-};
-
-document.getElementById("idPanel").innerText = 
-    JSON.stringify(ID_CHDSK_81E, null, 4);
-
-/* ---------------------------------------------------
-   AUTO‑LOADER für alle VECTOR‑Module
---------------------------------------------------- */
-const VECTOR_MODULES = [
-    "VECTOR.81.js",
-    "VECTOR.kapital.js",
-    "VECTOR.orbit.js",
-    "VECTOR.pipeline12.js",
-    "VECTOR.render.js",
-    "VECTOR.respo.js",
-    "VECTOR.ultra.js"
-];
-
-document.getElementById("vectorPanel").innerText =
-    VECTOR_MODULES.join("\n");
-
-/* ---------------------------------------------------
-   AUTO‑LOADER für alle VIS‑Module
---------------------------------------------------- */
-const VIS_MODULES = [
-    "VIS.orbitC.js",
-    "VIS.pipe12.js",
-    "VIS.qi_iqq.js",
-    "VIS.stationen.js"
-];
-
-document.getElementById("visPanel").innerText =
-    VIS_MODULES.join("\n");
-
-/* ---------------------------------------------------
-   AUTO‑LOADER für alle GEO‑Module
---------------------------------------------------- */
-const GEO_MODULES = [
-    "GEO4D.js",
-    "GEO5D.js",
-    "GEOID.js",
-    "GEOUniverse.js"
-];
-
-document.getElementById("geoPanel").innerText =
-    GEO_MODULES.join("\n");
-
-/* ---------------------------------------------------
-   System‑Monitor
---------------------------------------------------- */
-function updateMonitor() {
-    document.getElementById("monitor").innerText =
-        JSON.stringify({
-            online: navigator.onLine,
-            timestamp: new Date().toISOString(),
-            modules: {
-                vector: VECTOR_MODULES.length,
-                vis: VIS_MODULES.length,
-                geo: GEO_MODULES.length
-            }
-        }, null, 4);
-}
-
-/* ---------------------------------------------------
-   Universe‑Renderer
---------------------------------------------------- */
-function renderUniverse() {
-    document.getElementById("renderer").innerText =
-        "Universe Render gestartet…\n" +
-        "Orbit geladen…\n" +
-        "Pipeline geladen…\n" +
-        "GEO‑Universe geladen…\n" +
-        "81E‑Whirl aktiv… 🌀\n" +
-        "Render abgeschlossen.";
-}
-
-/* ---------------------------------------------------
-   Initialisierung
---------------------------------------------------- */
-updateMonitor();
 </script>
 
 </body>
