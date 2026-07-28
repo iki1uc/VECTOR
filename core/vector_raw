@@ -2,4 +2,12 @@
 <script src="./core/vector.EXP"></script>
 <script>
 window.vectorEXP = new VECTOR_EXP(vector_raw);
+<script>
+import { WHIRL_CORE } from "../WHIRL/WHIRL_CORE.js";
+
+export function VECTOR_RAW(v, t) {
+    const whirl = WHIRL_CORE(v, t);
+    return { ...v, whirl };
+}
+
 </script>
