@@ -4,14 +4,12 @@ import { PQ_PC_Parallel } from "../PQ/PQ_PC_Parallel.js";
 import { RESPO_Whirl } from "../RESPO/RESPO_Whirl.js";
 import { NC_link_Whirl } from "../NC/NC_link_Whirl.js";
 import { WATSON } from "../API/WATSON.js";
-
 export function PIPELINE_LOAD(input){
     if(!WATSON.valid(input)){
         return { status: "INVALID" };
     }
     return KI_WAKE_UP(input);
 }
-
 export function KI_WAKE_UP(input){
 
     const v = { x: input.length, y: input.length/2, z: input.length/3 };
@@ -25,7 +23,6 @@ export function KI_WAKE_UP(input){
 
     return { whirl, respo, nc };
 }
-
 document.addEventListener("keydown", e=>{
     if(e.key === "Enter"){
         const text = input.value;
